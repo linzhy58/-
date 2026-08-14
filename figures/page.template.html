@@ -1,0 +1,191 @@
+<title>术后疼痛神经解码技术路线</title>
+<style>
+:root{
+  --ground:#F6F8F9; --plate:#FFFFFF; --ink:#12212B; --ink-2:#3D525F;
+  --muted:#5D707C; --line:#DCE5E9; --line-soft:#E9EFF2;
+  --teal:#1C6C86; --indigo:#2C4C7C; --amber:#9A6B1E;
+  --chip:#EDF3F5;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D151B; --plate:#131E25; --ink:#E8EFF3; --ink-2:#B9C8D1;
+    --muted:#9DAEB9; --line:#243440; --line-soft:#1C2A33;
+    --teal:#63B6CD; --indigo:#8FA9DC; --amber:#D6AC63;
+    --chip:#18262E;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D151B; --plate:#131E25; --ink:#E8EFF3; --ink-2:#B9C8D1;
+  --muted:#9DAEB9; --line:#243440; --line-soft:#1C2A33;
+  --teal:#63B6CD; --indigo:#8FA9DC; --amber:#D6AC63;
+  --chip:#18262E;
+}
+
+/* ---- 图版样式（与独立 SVG 同源，支持深色） ---- */
+/*FIGURE_CSS*/
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB",
+    "Microsoft YaHei","WenQuanYi Zen Hei",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px; margin:0 auto; padding:56px 28px 96px;
+  display:flex; flex-direction:column; gap:44px;}
+
+header{display:flex; flex-direction:column; gap:12px;
+  border-bottom:1px solid var(--line); padding-bottom:26px;}
+.eyebrow{font-size:11.5px; letter-spacing:1.6px; text-transform:uppercase;
+  color:var(--teal); font-weight:700;}
+h1{margin:0; font-size:29px; line-height:1.35; font-weight:700;
+  letter-spacing:-.2px; text-wrap:balance;}
+.lede{margin:0; max-width:66ch; color:var(--ink-2); font-size:15.5px;}
+.meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
+.chip{background:var(--chip); color:var(--ink-2); border:1px solid var(--line-soft);
+  border-radius:999px; padding:4px 12px; font-size:12px; letter-spacing:.2px;}
+
+/* ---- 图版容器 ---- */
+figure{margin:0; background:var(--plate); border:1px solid var(--line);
+  border-radius:12px; overflow:hidden;}
+.plate-bar{display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:12px 18px; border-bottom:1px solid var(--line-soft); flex-wrap:wrap;}
+.plate-id{font-size:12px; letter-spacing:.9px; text-transform:uppercase;
+  color:var(--muted); font-weight:700;}
+.zoom{display:flex; gap:6px;}
+.zoom button{font:inherit; font-size:12.5px; padding:5px 13px; border-radius:7px;
+  border:1px solid var(--line); background:transparent; color:var(--ink-2);
+  cursor:pointer; transition:background .15s, color .15s, border-color .15s;}
+.zoom button:hover{border-color:var(--teal); color:var(--teal);}
+.zoom button[aria-pressed="true"]{background:var(--teal); border-color:var(--teal);
+  color:var(--plate);}
+.zoom button:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+.stage{overflow-x:auto; padding:22px;}
+.stage svg{display:block; width:100%; height:auto; margin:0 auto;}
+.stage.actual svg{width:1240px; max-width:none;}
+figcaption{padding:16px 22px 20px; border-top:1px solid var(--line-soft);
+  color:var(--muted); font-size:13px; line-height:1.7;}
+figcaption b{color:var(--ink); font-weight:700;}
+
+/* ---- 说明区 ---- */
+.cols{display:grid; gap:30px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+section h2{margin:0 0 14px; font-size:13px; letter-spacing:1.3px; text-transform:uppercase;
+  color:var(--teal); font-weight:700;}
+section h2 .zh{letter-spacing:.4px; text-transform:none; font-size:16px;
+  color:var(--ink); display:block; margin-top:3px;}
+ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;}
+li{position:relative; padding-left:17px; color:var(--ink-2); font-size:14.4px;}
+li::before{content:""; position:absolute; left:0; top:.62em; width:5px; height:5px;
+  border-radius:1px; background:var(--teal);}
+li.warn::before{background:var(--amber);}
+li b{color:var(--ink); font-weight:600;}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12.8px;
+  background:var(--chip); border:1px solid var(--line-soft); border-radius:4px;
+  padding:1px 6px; color:var(--ink);}
+.note{border-left:3px solid var(--amber); background:var(--chip);
+  padding:14px 18px; border-radius:0 8px 8px 0; color:var(--ink-2); font-size:14.2px;}
+.note b{color:var(--ink);}
+footer{border-top:1px solid var(--line); padding-top:20px; color:var(--muted); font-size:12.5px;}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">研究技术路线 · 图版初稿 v1</div>
+    <h1>术后疼痛神经解码与客观疼痛指数（OPI）技术路线</h1>
+    <p class="lede">按 SCI 期刊图版与基金申请书技术路线图的双重规范排版：两阶段泳道、里程碑闸口、
+      CONSORT 式随机与合流、中英双语标注，矢量输出可直接投稿或插入申请书。</p>
+    <div class="meta">
+      <span class="chip">画布 1240 × 1527 px</span>
+      <span class="chip">矢量 SVG · 300 dpi PNG</span>
+      <span class="chip">色盲安全配色</span>
+      <span class="chip">可灰度打印</span>
+    </div>
+  </header>
+
+  <figure>
+    <div class="plate-bar">
+      <span class="plate-id">Figure 1 · Study design</span>
+      <div class="zoom">
+        <button type="button" id="fit" aria-pressed="true">适应宽度</button>
+        <button type="button" id="actual" aria-pressed="false">原始尺寸 100%</button>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <!--FIGURE_SVG-->
+    </div>
+    <figcaption><b>图 1 |</b> 研究总体技术路线。阶段Ⅰ（前瞻性观察队列）以 EEG 为核心的多模态神经生理信号为输入，
+      开发并验证术后疼痛神经解码模型，输出客观疼痛指数（OPI）并确定风险阈值；经模型锁定与 SOP 定稿后进入阶段Ⅱ
+      （随机对照试验），比较 OPI 辅助的人机协同闭环镇痛管理与常规管理在主要／次要结局上的差异。</figcaption>
+  </figure>
+
+  <div class="note"><b>先看这里：</b>你给的原图只有 9 个节点标题，一张能过审的技术路线图需要更多信息密度。
+    我在保留你全部原文标题的前提下，补了各步骤的方法学要点、结局指标与统计策略作为<b>草稿占位</b>。
+    下面第二栏逐条列出了哪些是我补的、哪些留了空格等你填——请按你的方案逐条改写或删除。</div>
+
+  <div class="cols">
+    <section>
+      <h2>Design decisions<span class="zh">这一稿的排版取舍</span></h2>
+      <ul>
+        <li><b>泳道分期</b>：阶段Ⅰ／Ⅱ 用底色带 + 左上角胶囊标签区隔，右上角预留研究周期，一眼看出两阶段边界。</li>
+        <li><b>里程碑闸口</b>：把「模型锁定与 SOP 定稿」提为跨阶段的琥珀色闸口，明确 Go／No-Go 决策点——评审最看重的就是这个节点。</li>
+        <li><b>机制而非名词</b>：「人机协同闭环」展开为<b>连续感知 → 实时 OPI → 阈值预警 → 镇痛调整 → 反馈</b>的四节点回路，虚线回环即闭环本身。</li>
+        <li><b>颜色编码信息</b>：青色＝神经解码链路，靛蓝＝试验主流程与试验组，灰色＝对照组，琥珀＝里程碑。转成灰度后仍靠深浅区分。</li>
+        <li><b>对照组设盲</b>：补了「同步采集 OPI 但对医护与患者设盲」——这是本设计成立的关键，图上必须可见。</li>
+        <li><b>双语标注</b>：中文为主、英文小字为辅，同一张图可用于中文申请书与英文投稿。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Placeholders<span class="zh">需要你确认或替换</span></h2>
+      <ul>
+        <li class="warn"><b><code>n = ___</code> / <code>约 __ 个月</code></b>：入组量、两臂样本量、各阶段周期，全部留空待填。</li>
+        <li class="warn"><b>感知模态</b>：现写 EEG · HRV · EDA · 行为学，按你实际采集的通道增删。</li>
+        <li class="warn"><b>建模路径</b>：现写「特征提取与降维 → 机器学习／深度学习」与「内部交叉 + 时间／外部验证」。</li>
+        <li class="warn"><b>OPI 刻度</b>：现设 0–100 连续输出并与主观评分对齐，若用其他量纲请改。</li>
+        <li class="warn"><b>主要结局</b>：现写「术后 48 h 疼痛强度曲线下面积（AUC）」——这是我拟的，务必换成你方案里的定义。</li>
+        <li class="warn"><b>统计方法</b>：ITT／PP、混合效应模型、多重比较控制、多重插补均为常规草稿。</li>
+        <li class="warn"><b>随机与盲法</b>：现写分层区组随机、中央分配隐藏、结局评价者与统计师设盲。</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="cols">
+    <section>
+      <h2>Deliverables<span class="zh">交付文件</span></h2>
+      <ul>
+        <li><code>study-design.svg</code>　矢量原图，可用 Illustrator／Inkscape／PowerPoint 打开逐字修改，投稿首选。</li>
+        <li><code>study-design@3x.png</code>　3720 × 4581 位图，插入 Word 申请书约合 300 dpi。</li>
+        <li><code>build_figure.py</code>　生成脚本：所有文字、配色、间距集中在文件顶部，改文字重跑即可，不必手动挪线。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next round<span class="zh">下一稿可选方向</span></h2>
+      <ul>
+        <li><b>横版</b>：改为左右两栏（阶段Ⅰ｜阶段Ⅱ），适配 A4 横向或期刊双栏跨栏图。</li>
+        <li><b>黑白投稿版</b>：去彩色，仅用线宽、灰阶与网点区分，满足部分期刊的单色版面。</li>
+        <li><b>精简版</b>：折叠闭环子面板与英文行，压到约 2/3 高度，用于标书正文中的小图。</li>
+        <li><b>全英文版</b>：同一脚本换文案即可，用于英文投稿的 Figure 1。</li>
+        <li><b>加时间轴</b>：右侧增加甘特式时间刻度，标注各阶段起止与考核节点。</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>初稿 v1 · 告诉我改哪里，我直接在源脚本上改并重出图。</footer>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'),
+      fit=document.getElementById('fit'),
+      actual=document.getElementById('actual');
+  function set(isActual){
+    stage.classList.toggle('actual', isActual);
+    fit.setAttribute('aria-pressed', String(!isActual));
+    actual.setAttribute('aria-pressed', String(isActual));
+  }
+  fit.addEventListener('click', function(){ set(false); });
+  actual.addEventListener('click', function(){ set(true); });
+})();
+</script>

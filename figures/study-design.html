@@ -1,0 +1,419 @@
+<title>术后疼痛神经解码技术路线</title>
+<style>
+:root{
+  --ground:#F6F8F9; --plate:#FFFFFF; --ink:#12212B; --ink-2:#3D525F;
+  --muted:#5D707C; --line:#DCE5E9; --line-soft:#E9EFF2;
+  --teal:#1C6C86; --indigo:#2C4C7C; --amber:#9A6B1E;
+  --chip:#EDF3F5;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D151B; --plate:#131E25; --ink:#E8EFF3; --ink-2:#B9C8D1;
+    --muted:#9DAEB9; --line:#243440; --line-soft:#1C2A33;
+    --teal:#63B6CD; --indigo:#8FA9DC; --amber:#D6AC63;
+    --chip:#18262E;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D151B; --plate:#131E25; --ink:#E8EFF3; --ink-2:#B9C8D1;
+  --muted:#9DAEB9; --line:#243440; --line-soft:#1C2A33;
+  --teal:#63B6CD; --indigo:#8FA9DC; --amber:#D6AC63;
+  --chip:#18262E;
+}
+
+/* ---- 图版样式（与独立 SVG 同源，支持深色） ---- */
+:root{
+  --f-paper:#FFFFFF; --f-ink:#12212B; --f-muted:#5D707C; --f-hair:#DAE3E8;
+  --f-band1:#F2F7F9; --f-band1-line:#DCE9EE;
+  --f-band2:#F5F6FA; --f-band2-line:#E0E4EE;
+  --f-a1:#1C6C86; --f-a2:#2C4C7C; --f-ctrl:#68747F; --f-gate:#9A6B1E;
+  --f-gate-fill:#FCF6EA; --f-gate-line:#E3CB9C;
+  --f-card-line:#D5DFE5; --f-card-line2:#DCE1EC; --f-card-line3:#DEE2E6;
+  --f-node:#F4F9FB; --f-node-line:#CBDFE7; --f-loop-line:#8FBFCF;
+  --f-on-accent:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --f-paper:#141E26; --f-ink:#E8EFF3; --f-muted:#9DAEB9; --f-hair:#2C3A45;
+  --f-band1:#101A21; --f-band1-line:#22343E;
+  --f-band2:#121821; --f-band2-line:#25303F;
+  --f-a1:#63B6CD; --f-a2:#8FA9DC; --f-ctrl:#9AA7B3; --f-gate:#D6AC63;
+  --f-gate-fill:#231C10; --f-gate-line:#4A3B22;
+  --f-card-line:#2B3B45; --f-card-line2:#2C3648; --f-card-line3:#303A42;
+  --f-node:#16242C; --f-node-line:#2B4450; --f-loop-line:#3C6A7B;
+  --f-on-accent:#0E1A20;
+}}
+:root[data-theme="dark"]{
+  --f-paper:#141E26; --f-ink:#E8EFF3; --f-muted:#9DAEB9; --f-hair:#2C3A45;
+  --f-band1:#101A21; --f-band1-line:#22343E;
+  --f-band2:#121821; --f-band2-line:#25303F;
+  --f-a1:#63B6CD; --f-a2:#8FA9DC; --f-ctrl:#9AA7B3; --f-gate:#D6AC63;
+  --f-gate-fill:#231C10; --f-gate-line:#4A3B22;
+  --f-card-line:#2B3B45; --f-card-line2:#2C3648; --f-card-line3:#303A42;
+  --f-node:#16242C; --f-node-line:#2B4450; --f-loop-line:#3C6A7B;
+  --f-on-accent:#0E1A20;
+}
+
+.fig-root { font-family: "Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.band { stroke-width:1; }
+.band-a1 { fill:var(--f-band1); stroke:var(--f-band1-line); }
+.band-a2 { fill:var(--f-band2); stroke:var(--f-band2-line); }
+.card { fill:var(--f-paper); stroke-width:1.1; }
+.card-a1 { stroke:var(--f-card-line); }
+.card-a2 { stroke:var(--f-card-line2); }
+.card-ctrl { stroke:var(--f-card-line3); }
+.card-ink { stroke:var(--f-card-line3); }
+.card-gate { fill:var(--f-gate-fill); stroke:var(--f-gate-line); }
+.badge-a1 { fill:var(--f-a1); }
+.badge-a2 { fill:var(--f-a2); }
+.dot { }
+.dot-a1 { fill:var(--f-a1); }
+.dot-a2 { fill:var(--f-a2); }
+.dot-ctrl { fill:var(--f-ctrl); }
+.dot-ink { fill:var(--f-muted); }
+.dot-gate { fill:var(--f-gate); }
+.hair { stroke:var(--f-hair); stroke-width:1; }
+.tab { stroke:none; }
+.tab-a1 { fill:var(--f-a1); }
+.tab-a2 { fill:var(--f-a2); }
+.loop { fill:none; stroke:var(--f-loop-line); stroke-width:1.2; stroke-dasharray:5 4; }
+.node { fill:var(--f-node); stroke:var(--f-node-line); stroke-width:1; }
+.lbl-bg { fill:var(--f-band2); }
+.conn { stroke:var(--f-muted); stroke-width:1.6; stroke-linecap:round; }
+.conn-a1 { stroke:var(--f-a1); }
+.conn-a2 { stroke:var(--f-a2); }
+.conn-ctrl { stroke:var(--f-ctrl); }
+.conn-gate { stroke:var(--f-gate); }
+.conn-fb { stroke:var(--f-a1); stroke-dasharray:5 4; stroke-width:1.4; }
+.junction { fill:var(--f-a2); }
+.ah { fill:var(--f-muted); }
+.ah-fb { fill:var(--f-a1); }
+
+.t-title { font-size:16px; font-weight:600; fill:var(--f-ink); letter-spacing:.2px; }
+.t-en { font-size:11px; fill:var(--f-muted); letter-spacing:.25px; }
+.t-sub { font-size:12.2px; fill:var(--f-muted); }
+.t-badge { font-size:12.5px; font-weight:700; fill:var(--f-on-accent); letter-spacing:0; }
+.t-tab { font-size:14.5px; font-weight:600; fill:var(--f-on-accent); letter-spacing:.4px; }
+.t-tab-en { font-size:10.5px; font-weight:600; letter-spacing:.9px; }
+.tone-a1 { fill:var(--f-a1); }
+.tone-a2 { fill:var(--f-a2); }
+.t-note { font-size:11px; fill:var(--f-muted); }
+.t-loop { font-size:14px; font-weight:600; fill:var(--f-a1); letter-spacing:.2px; }
+.t-node { font-size:13px; font-weight:600; fill:var(--f-ink); }
+.t-node-en { font-size:10px; fill:var(--f-muted); }
+.t-fb { font-size:11px; fill:var(--f-a1); }
+.t-leg { font-size:11.5px; fill:var(--f-muted); }
+.t-cap { font-size:12.5px; fill:var(--f-muted); }
+.t-cap-b { font-weight:700; fill:var(--f-ink); }
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB",
+    "Microsoft YaHei","WenQuanYi Zen Hei",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px; margin:0 auto; padding:56px 28px 96px;
+  display:flex; flex-direction:column; gap:44px;}
+
+header{display:flex; flex-direction:column; gap:12px;
+  border-bottom:1px solid var(--line); padding-bottom:26px;}
+.eyebrow{font-size:11.5px; letter-spacing:1.6px; text-transform:uppercase;
+  color:var(--teal); font-weight:700;}
+h1{margin:0; font-size:29px; line-height:1.35; font-weight:700;
+  letter-spacing:-.2px; text-wrap:balance;}
+.lede{margin:0; max-width:66ch; color:var(--ink-2); font-size:15.5px;}
+.meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
+.chip{background:var(--chip); color:var(--ink-2); border:1px solid var(--line-soft);
+  border-radius:999px; padding:4px 12px; font-size:12px; letter-spacing:.2px;}
+
+/* ---- 图版容器 ---- */
+figure{margin:0; background:var(--plate); border:1px solid var(--line);
+  border-radius:12px; overflow:hidden;}
+.plate-bar{display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:12px 18px; border-bottom:1px solid var(--line-soft); flex-wrap:wrap;}
+.plate-id{font-size:12px; letter-spacing:.9px; text-transform:uppercase;
+  color:var(--muted); font-weight:700;}
+.zoom{display:flex; gap:6px;}
+.zoom button{font:inherit; font-size:12.5px; padding:5px 13px; border-radius:7px;
+  border:1px solid var(--line); background:transparent; color:var(--ink-2);
+  cursor:pointer; transition:background .15s, color .15s, border-color .15s;}
+.zoom button:hover{border-color:var(--teal); color:var(--teal);}
+.zoom button[aria-pressed="true"]{background:var(--teal); border-color:var(--teal);
+  color:var(--plate);}
+.zoom button:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+.stage{overflow-x:auto; padding:22px;}
+.stage svg{display:block; width:100%; height:auto; margin:0 auto;}
+.stage.actual svg{width:1240px; max-width:none;}
+figcaption{padding:16px 22px 20px; border-top:1px solid var(--line-soft);
+  color:var(--muted); font-size:13px; line-height:1.7;}
+figcaption b{color:var(--ink); font-weight:700;}
+
+/* ---- 说明区 ---- */
+.cols{display:grid; gap:30px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+section h2{margin:0 0 14px; font-size:13px; letter-spacing:1.3px; text-transform:uppercase;
+  color:var(--teal); font-weight:700;}
+section h2 .zh{letter-spacing:.4px; text-transform:none; font-size:16px;
+  color:var(--ink); display:block; margin-top:3px;}
+ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;}
+li{position:relative; padding-left:17px; color:var(--ink-2); font-size:14.4px;}
+li::before{content:""; position:absolute; left:0; top:.62em; width:5px; height:5px;
+  border-radius:1px; background:var(--teal);}
+li.warn::before{background:var(--amber);}
+li b{color:var(--ink); font-weight:600;}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12.8px;
+  background:var(--chip); border:1px solid var(--line-soft); border-radius:4px;
+  padding:1px 6px; color:var(--ink);}
+.note{border-left:3px solid var(--amber); background:var(--chip);
+  padding:14px 18px; border-radius:0 8px 8px 0; color:var(--ink-2); font-size:14.2px;}
+.note b{color:var(--ink);}
+footer{border-top:1px solid var(--line); padding-top:20px; color:var(--muted); font-size:12.5px;}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">研究技术路线 · 图版初稿 v1</div>
+    <h1>术后疼痛神经解码与客观疼痛指数（OPI）技术路线</h1>
+    <p class="lede">按 SCI 期刊图版与基金申请书技术路线图的双重规范排版：两阶段泳道、里程碑闸口、
+      CONSORT 式随机与合流、中英双语标注，矢量输出可直接投稿或插入申请书。</p>
+    <div class="meta">
+      <span class="chip">画布 1240 × 1527 px</span>
+      <span class="chip">矢量 SVG · 300 dpi PNG</span>
+      <span class="chip">色盲安全配色</span>
+      <span class="chip">可灰度打印</span>
+    </div>
+  </header>
+
+  <figure>
+    <div class="plate-bar">
+      <span class="plate-id">Figure 1 · Study design</span>
+      <div class="zoom">
+        <button type="button" id="fit" aria-pressed="true">适应宽度</button>
+        <button type="button" id="actual" aria-pressed="false">原始尺寸 100%</button>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 1445" class="fig-root" role="img" aria-label="两阶段研究技术路线：阶段Ⅰ前瞻性观察队列完成多模态神经生理感知、疼痛神经解码模型开发验证与客观疼痛指数（OPI）阈值确定，经模型锁定后进入阶段Ⅱ随机对照试验，比较 OPI 辅助闭环管理与常规管理。">
+<defs>
+  <marker id="ah" viewBox="0 0 11 11" refX="10" refY="5.5" markerWidth="10"
+          markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+    <path d="M0.5,1 L10,5.5 L0.5,10 L3,5.5 Z" class="ah"/>
+  </marker>
+  <marker id="ah-fb" viewBox="0 0 11 11" refX="10" refY="5.5" markerWidth="9"
+          markerHeight="9" markerUnits="userSpaceOnUse" orient="auto">
+    <path d="M0.5,1 L10,5.5 L0.5,10 L3,5.5 Z" class="ah-fb"/>
+  </marker>
+</defs>
+<rect x="44" y="571" width="1152" height="814" rx="14" class="band band-a2"/>
+<rect x="385" y="40" width="470" height="106" rx="8" class="card card-ink "/>
+<text x="620" y="66" class="t-title" text-anchor="middle">术前筛选与知情同意</text>
+<text x="620" y="90" class="t-en" text-anchor="middle">Preoperative screening &amp; informed consent</text>
+<line x1="407" y1="104" x2="833" y2="104" class="hair"/>
+<text x="620" y="126" class="t-sub" text-anchor="middle">纳入／排除标准 · 基线与围术期资料采集 · 拟入组 n = ___</text>
+<rect x="44" y="176" width="1152" height="251" rx="14" class="band band-a1"/>
+<rect x="72" y="158" width="206.025" height="36" rx="18" class="tab tab-a1"/>
+<text x="92" y="181.2" class="t-tab">阶段 Ⅰ · 前瞻性观察队列</text>
+<text x="292.025" y="180" class="t-tab-en tone-a1">PHASE I · PROSPECTIVE OBSERVATIONAL COHORT</text>
+<text x="1168" y="180" class="t-note" text-anchor="end">研究周期：约 __ 个月</text>
+<rect x="72" y="242" width="326" height="149" rx="8" class="card card-a1 "/>
+<text x="126" y="268" class="t-title">EEG 为核心的</text>
+<text x="126" y="292" class="t-title">多模态神经生理感知</text>
+<text x="126" y="316" class="t-en">Multimodal neurophysiological sensing</text>
+<line x1="94" y1="330" x2="376" y2="330" class="hair"/>
+<rect x="94" y="344" width="4" height="4" class="dot dot-a1"/>
+<text x="106" y="352" class="t-sub">围术期连续采集：EEG · HRV · EDA · 行为学</text>
+<rect x="94" y="363" width="4" height="4" class="dot dot-a1"/>
+<text x="106" y="371" class="t-sub">同步记录 NRS／VAS 评分与镇痛用药</text>
+<circle cx="102" cy="263" r="13" class="badge badge-a1"/>
+<text x="102" y="268" class="t-badge" text-anchor="middle">1</text>
+<rect x="457" y="242" width="326" height="149" rx="8" class="card card-a1 "/>
+<text x="511" y="268" class="t-title">术后疼痛神经解码</text>
+<text x="511" y="292" class="t-title">模型开发与验证</text>
+<text x="511" y="316" class="t-en">Decoding model development &amp; validation</text>
+<line x1="479" y1="330" x2="761" y2="330" class="hair"/>
+<rect x="479" y="344" width="4" height="4" class="dot dot-a1"/>
+<text x="491" y="352" class="t-sub">特征提取与降维 → 机器学习／深度学习建模</text>
+<rect x="479" y="363" width="4" height="4" class="dot dot-a1"/>
+<text x="491" y="371" class="t-sub">内部交叉验证 + 时间／外部独立验证</text>
+<circle cx="487" cy="263" r="13" class="badge badge-a1"/>
+<text x="487" y="268" class="t-badge" text-anchor="middle">2</text>
+<rect x="842" y="242" width="326" height="149" rx="8" class="card card-a1 "/>
+<text x="896" y="268" class="t-title">客观疼痛指数（OPI）</text>
+<text x="896" y="292" class="t-title">与风险阈值确定</text>
+<text x="896" y="316" class="t-en">Objective Pain Index &amp; risk thresholds</text>
+<line x1="864" y1="330" x2="1146" y2="330" class="hair"/>
+<rect x="864" y="344" width="4" height="4" class="dot dot-a1"/>
+<text x="876" y="352" class="t-sub">连续量化输出（0–100）并与主观评分对齐</text>
+<rect x="864" y="363" width="4" height="4" class="dot dot-a1"/>
+<text x="876" y="371" class="t-sub">确定预警截断值与疼痛风险分层</text>
+<circle cx="872" cy="263" r="13" class="badge badge-a1"/>
+<text x="872" y="268" class="t-badge" text-anchor="middle">3</text>
+<path d="M406,316.5 L453,316.5" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<path d="M791,316.5 L838,316.5" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="310" y="471" width="620" height="70" rx="8" class="card card-gate "/>
+<text x="620" y="497" class="t-title" text-anchor="middle">里程碑：模型锁定与 SOP 定稿</text>
+<text x="620" y="521" class="t-en" text-anchor="middle">Milestone — model lock &amp; standard operating procedure finalized</text>
+<path d="M1005,391 L1005,439 A10,10 0 0 1 995,449 L629,449 A9,9 0 0 0 620,458 L620,467" class="conn conn-gate" fill="none" marker-end="url(#ah)"/>
+<path d="M620,146 L620,200 A10,10 0 0 1 610,210 L245,210 A10,10 0 0 0 235,220 L235,238" class="conn" fill="none" marker-end="url(#ah)"/>
+<path d="M620,541 L620,633" class="conn" fill="none" marker-end="url(#ah)"/>
+<rect x="410" y="637" width="420" height="106" rx="8" class="card card-a2 "/>
+<text x="620" y="663" class="t-title" text-anchor="middle">随机分组</text>
+<text x="620" y="687" class="t-en" text-anchor="middle">Randomization  (1 : 1)</text>
+<line x1="432" y1="701" x2="808" y2="701" class="hair"/>
+<text x="620" y="723" class="t-sub" text-anchor="middle">分层区组随机 · 中央分配隐藏 · 结局评价者与统计师设盲</text>
+<rect x="72" y="809" width="518" height="144" rx="8" class="card card-a2 "/>
+<text x="94" y="835" class="t-title">客观疼痛指数（OPI）辅助组</text>
+<text x="94" y="859" class="t-en">OPI-assisted management  ·  intervention arm   n = ___</text>
+<line x1="94" y1="873" x2="568" y2="873" class="hair"/>
+<rect x="94" y="887" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="895" class="t-sub">常规镇痛管理 + OPI 连续监测与实时显示</text>
+<rect x="94" y="906" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="914" class="t-sub">超阈值自动预警，触发人机协同决策</text>
+<rect x="94" y="925" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="933" class="t-sub">按预设 SOP 调整镇痛方案并记录响应</text>
+<rect x="650" y="809" width="518" height="144" rx="8" class="card card-ctrl "/>
+<text x="672" y="835" class="t-title">常规管理组</text>
+<text x="672" y="859" class="t-en">Standard care  ·  control arm   n = ___</text>
+<line x1="672" y1="873" x2="1146" y2="873" class="hair"/>
+<rect x="672" y="887" width="4" height="4" class="dot dot-ctrl"/>
+<text x="684" y="895" class="t-sub">按现行镇痛常规进行管理</text>
+<rect x="672" y="906" width="4" height="4" class="dot dot-ctrl"/>
+<text x="684" y="914" class="t-sub">定时 NRS／VAS 评估与经验性调整</text>
+<rect x="672" y="925" width="4" height="4" class="dot dot-ctrl"/>
+<text x="684" y="933" class="t-sub">同步采集 OPI，但对医护与患者设盲</text>
+<path d="M620,743 L620,767 A10,10 0 0 1 610,777 L341,777 A10,10 0 0 0 331,787 L331,805" class="conn conn-a2" fill="none" marker-end="url(#ah)"/>
+<path d="M620,743 L620,767 A10,10 0 0 0 630,777 L899,777 A10,10 0 0 1 909,787 L909,805" class="conn conn-ctrl" fill="none" marker-end="url(#ah)"/>
+<rect x="72" y="985" width="518" height="152" rx="8" class="loop"/>
+<text x="92" y="1011" class="t-loop">神经解码驱动的人机协同闭环</text>
+<text x="92" y="1030" class="t-en">Neural-decoding-driven human–AI closed loop</text>
+<rect x="88" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="140.5" y="1065" class="t-node" text-anchor="middle">连续感知</text>
+<text x="140.5" y="1080" class="t-node-en" text-anchor="middle">EEG · HRV · EDA</text>
+<rect x="215" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="267.5" y="1065" class="t-node" text-anchor="middle">实时 OPI</text>
+<text x="267.5" y="1080" class="t-node-en" text-anchor="middle">0–100 连续输出</text>
+<path d="M197,1068 L212,1068" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="342" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="394.5" y="1065" class="t-node" text-anchor="middle">阈值预警</text>
+<text x="394.5" y="1080" class="t-node-en" text-anchor="middle">风险分层提示</text>
+<path d="M324,1068 L339,1068" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="469" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="521.5" y="1065" class="t-node" text-anchor="middle">镇痛调整</text>
+<text x="521.5" y="1080" class="t-node-en" text-anchor="middle">医护决策 + SOP</text>
+<path d="M451,1068 L466,1068" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<path d="M521.5,1091 L521.5,1105 A8,8 0 0 1 513.5,1113 L148.5,1113 A8,8 0 0 1 140.5,1105 L140.5,1095" class="conn conn-fb" fill="none" marker-end="url(#ah-fb)"/>
+<rect x="277.7" y="1104" width="106.6" height="16" class="lbl-bg"/>
+<text x="331" y="1117" class="t-fb" text-anchor="middle">疗效再评估 · 反馈</text>
+<path d="M331,953 L331,981" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="72" y="1205" width="518" height="144" rx="8" class="card card-a2 "/>
+<text x="94" y="1231" class="t-title">随访与结局评价</text>
+<text x="94" y="1255" class="t-en">Follow-up &amp; outcome assessment</text>
+<line x1="94" y1="1269" x2="568" y2="1269" class="hair"/>
+<rect x="94" y="1283" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="1291" class="t-sub">主要结局：术后 48 h 疼痛强度曲线下面积（AUC）</text>
+<rect x="94" y="1302" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="1310" class="t-sub">次要结局：阿片累积用量 · 补救镇痛率 · 恢复质量</text>
+<rect x="94" y="1321" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="1329" class="t-sub">安全性与远期：不良事件 · 慢性术后疼痛（3／6 个月）</text>
+<rect x="650" y="1205" width="518" height="144" rx="8" class="card card-a2 "/>
+<text x="672" y="1231" class="t-title">统计分析</text>
+<text x="672" y="1255" class="t-en">Statistical analysis</text>
+<line x1="672" y1="1269" x2="1146" y2="1269" class="hair"/>
+<rect x="672" y="1283" width="4" height="4" class="dot dot-a2"/>
+<text x="684" y="1291" class="t-sub">意向性治疗（ITT）为主，符合方案集（PP）为辅</text>
+<rect x="672" y="1302" width="4" height="4" class="dot dot-a2"/>
+<text x="684" y="1310" class="t-sub">混合效应模型 · 协变量校正 · 多重比较控制</text>
+<rect x="672" y="1321" width="4" height="4" class="dot dot-a2"/>
+<text x="684" y="1329" class="t-sub">预设亚组分析 · 缺失数据多重插补 · 敏感性分析</text>
+<path d="M331,1137 L331,1163 A10,10 0 0 0 331,1183 L331,1201" class="conn conn-a2" fill="none" marker-end="url(#ah)"/>
+<path d="M909,953 L909,1163 A10,10 0 0 1 899,1173 L331,1173" class="conn conn-ctrl" fill="none"/>
+<circle cx="331" cy="1173" r="3.6" class="junction"/>
+<path d="M598,1277 L646,1277" class="conn conn-a2" fill="none" marker-end="url(#ah)"/>
+<rect x="72" y="553" width="191.525" height="36" rx="18" class="tab tab-a2"/>
+<text x="92" y="576.2" class="t-tab">阶段 Ⅱ · 随机对照试验</text>
+<text x="277.525" y="575" class="t-tab-en tone-a2">PHASE II · RANDOMISED CONTROLLED TRIAL</text>
+<text x="1168" y="575" class="t-note" text-anchor="end">研究周期：约 __ 个月</text>
+<line x1="72" y1="1419" x2="98" y2="1419" class="conn conn-a1" marker-end="url(#ah)"/>
+<text x="112" y="1423" class="t-leg">主流程</text>
+<line x1="172.5" y1="1419" x2="198.5" y2="1419" class="conn conn-fb" marker-end="url(#ah-fb)"/>
+<text x="212.5" y="1423" class="t-leg">反馈闭环</text>
+<rect x="284.5" y="1412" width="14" height="14" rx="3" class="card card-gate"/>
+<text x="308.5" y="1423" class="t-leg">阶段里程碑（Go／No-Go）</text>
+<text x="1168" y="1423" class="t-note" text-anchor="end">下划线处 ___ 为待填写的样本量与时间参数</text>
+</svg>
+    </div>
+    <figcaption><b>图 1 |</b> 研究总体技术路线。阶段Ⅰ（前瞻性观察队列）以 EEG 为核心的多模态神经生理信号为输入，
+      开发并验证术后疼痛神经解码模型，输出客观疼痛指数（OPI）并确定风险阈值；经模型锁定与 SOP 定稿后进入阶段Ⅱ
+      （随机对照试验），比较 OPI 辅助的人机协同闭环镇痛管理与常规管理在主要／次要结局上的差异。</figcaption>
+  </figure>
+
+  <div class="note"><b>先看这里：</b>你给的原图只有 9 个节点标题，一张能过审的技术路线图需要更多信息密度。
+    我在保留你全部原文标题的前提下，补了各步骤的方法学要点、结局指标与统计策略作为<b>草稿占位</b>。
+    下面第二栏逐条列出了哪些是我补的、哪些留了空格等你填——请按你的方案逐条改写或删除。</div>
+
+  <div class="cols">
+    <section>
+      <h2>Design decisions<span class="zh">这一稿的排版取舍</span></h2>
+      <ul>
+        <li><b>泳道分期</b>：阶段Ⅰ／Ⅱ 用底色带 + 左上角胶囊标签区隔，右上角预留研究周期，一眼看出两阶段边界。</li>
+        <li><b>里程碑闸口</b>：把「模型锁定与 SOP 定稿」提为跨阶段的琥珀色闸口，明确 Go／No-Go 决策点——评审最看重的就是这个节点。</li>
+        <li><b>机制而非名词</b>：「人机协同闭环」展开为<b>连续感知 → 实时 OPI → 阈值预警 → 镇痛调整 → 反馈</b>的四节点回路，虚线回环即闭环本身。</li>
+        <li><b>颜色编码信息</b>：青色＝神经解码链路，靛蓝＝试验主流程与试验组，灰色＝对照组，琥珀＝里程碑。转成灰度后仍靠深浅区分。</li>
+        <li><b>对照组设盲</b>：补了「同步采集 OPI 但对医护与患者设盲」——这是本设计成立的关键，图上必须可见。</li>
+        <li><b>双语标注</b>：中文为主、英文小字为辅，同一张图可用于中文申请书与英文投稿。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Placeholders<span class="zh">需要你确认或替换</span></h2>
+      <ul>
+        <li class="warn"><b><code>n = ___</code> / <code>约 __ 个月</code></b>：入组量、两臂样本量、各阶段周期，全部留空待填。</li>
+        <li class="warn"><b>感知模态</b>：现写 EEG · HRV · EDA · 行为学，按你实际采集的通道增删。</li>
+        <li class="warn"><b>建模路径</b>：现写「特征提取与降维 → 机器学习／深度学习」与「内部交叉 + 时间／外部验证」。</li>
+        <li class="warn"><b>OPI 刻度</b>：现设 0–100 连续输出并与主观评分对齐，若用其他量纲请改。</li>
+        <li class="warn"><b>主要结局</b>：现写「术后 48 h 疼痛强度曲线下面积（AUC）」——这是我拟的，务必换成你方案里的定义。</li>
+        <li class="warn"><b>统计方法</b>：ITT／PP、混合效应模型、多重比较控制、多重插补均为常规草稿。</li>
+        <li class="warn"><b>随机与盲法</b>：现写分层区组随机、中央分配隐藏、结局评价者与统计师设盲。</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="cols">
+    <section>
+      <h2>Deliverables<span class="zh">交付文件</span></h2>
+      <ul>
+        <li><code>study-design.svg</code>　矢量原图，可用 Illustrator／Inkscape／PowerPoint 打开逐字修改，投稿首选。</li>
+        <li><code>study-design@3x.png</code>　3720 × 4581 位图，插入 Word 申请书约合 300 dpi。</li>
+        <li><code>build_figure.py</code>　生成脚本：所有文字、配色、间距集中在文件顶部，改文字重跑即可，不必手动挪线。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next round<span class="zh">下一稿可选方向</span></h2>
+      <ul>
+        <li><b>横版</b>：改为左右两栏（阶段Ⅰ｜阶段Ⅱ），适配 A4 横向或期刊双栏跨栏图。</li>
+        <li><b>黑白投稿版</b>：去彩色，仅用线宽、灰阶与网点区分，满足部分期刊的单色版面。</li>
+        <li><b>精简版</b>：折叠闭环子面板与英文行，压到约 2/3 高度，用于标书正文中的小图。</li>
+        <li><b>全英文版</b>：同一脚本换文案即可，用于英文投稿的 Figure 1。</li>
+        <li><b>加时间轴</b>：右侧增加甘特式时间刻度，标注各阶段起止与考核节点。</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>初稿 v1 · 告诉我改哪里，我直接在源脚本上改并重出图。</footer>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'),
+      fit=document.getElementById('fit'),
+      actual=document.getElementById('actual');
+  function set(isActual){
+    stage.classList.toggle('actual', isActual);
+    fit.setAttribute('aria-pressed', String(!isActual));
+    actual.setAttribute('aria-pressed', String(isActual));
+  }
+  fit.addEventListener('click', function(){ set(false); });
+  actual.addEventListener('click', function(){ set(true); });
+})();
+</script>

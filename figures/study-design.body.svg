@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 1445" class="fig-root" role="img" aria-label="两阶段研究技术路线：阶段Ⅰ前瞻性观察队列完成多模态神经生理感知、疼痛神经解码模型开发验证与客观疼痛指数（OPI）阈值确定，经模型锁定后进入阶段Ⅱ随机对照试验，比较 OPI 辅助闭环管理与常规管理。">
+<defs>
+  <marker id="ah" viewBox="0 0 11 11" refX="10" refY="5.5" markerWidth="10"
+          markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+    <path d="M0.5,1 L10,5.5 L0.5,10 L3,5.5 Z" class="ah"/>
+  </marker>
+  <marker id="ah-fb" viewBox="0 0 11 11" refX="10" refY="5.5" markerWidth="9"
+          markerHeight="9" markerUnits="userSpaceOnUse" orient="auto">
+    <path d="M0.5,1 L10,5.5 L0.5,10 L3,5.5 Z" class="ah-fb"/>
+  </marker>
+</defs>
+<rect x="44" y="571" width="1152" height="814" rx="14" class="band band-a2"/>
+<rect x="385" y="40" width="470" height="106" rx="8" class="card card-ink "/>
+<text x="620" y="66" class="t-title" text-anchor="middle">术前筛选与知情同意</text>
+<text x="620" y="90" class="t-en" text-anchor="middle">Preoperative screening &amp; informed consent</text>
+<line x1="407" y1="104" x2="833" y2="104" class="hair"/>
+<text x="620" y="126" class="t-sub" text-anchor="middle">纳入／排除标准 · 基线与围术期资料采集 · 拟入组 n = ___</text>
+<rect x="44" y="176" width="1152" height="251" rx="14" class="band band-a1"/>
+<rect x="72" y="158" width="206.025" height="36" rx="18" class="tab tab-a1"/>
+<text x="92" y="181.2" class="t-tab">阶段 Ⅰ · 前瞻性观察队列</text>
+<text x="292.025" y="180" class="t-tab-en tone-a1">PHASE I · PROSPECTIVE OBSERVATIONAL COHORT</text>
+<text x="1168" y="180" class="t-note" text-anchor="end">研究周期：约 __ 个月</text>
+<rect x="72" y="242" width="326" height="149" rx="8" class="card card-a1 "/>
+<text x="126" y="268" class="t-title">EEG 为核心的</text>
+<text x="126" y="292" class="t-title">多模态神经生理感知</text>
+<text x="126" y="316" class="t-en">Multimodal neurophysiological sensing</text>
+<line x1="94" y1="330" x2="376" y2="330" class="hair"/>
+<rect x="94" y="344" width="4" height="4" class="dot dot-a1"/>
+<text x="106" y="352" class="t-sub">围术期连续采集：EEG · HRV · EDA · 行为学</text>
+<rect x="94" y="363" width="4" height="4" class="dot dot-a1"/>
+<text x="106" y="371" class="t-sub">同步记录 NRS／VAS 评分与镇痛用药</text>
+<circle cx="102" cy="263" r="13" class="badge badge-a1"/>
+<text x="102" y="268" class="t-badge" text-anchor="middle">1</text>
+<rect x="457" y="242" width="326" height="149" rx="8" class="card card-a1 "/>
+<text x="511" y="268" class="t-title">术后疼痛神经解码</text>
+<text x="511" y="292" class="t-title">模型开发与验证</text>
+<text x="511" y="316" class="t-en">Decoding model development &amp; validation</text>
+<line x1="479" y1="330" x2="761" y2="330" class="hair"/>
+<rect x="479" y="344" width="4" height="4" class="dot dot-a1"/>
+<text x="491" y="352" class="t-sub">特征提取与降维 → 机器学习／深度学习建模</text>
+<rect x="479" y="363" width="4" height="4" class="dot dot-a1"/>
+<text x="491" y="371" class="t-sub">内部交叉验证 + 时间／外部独立验证</text>
+<circle cx="487" cy="263" r="13" class="badge badge-a1"/>
+<text x="487" y="268" class="t-badge" text-anchor="middle">2</text>
+<rect x="842" y="242" width="326" height="149" rx="8" class="card card-a1 "/>
+<text x="896" y="268" class="t-title">客观疼痛指数（OPI）</text>
+<text x="896" y="292" class="t-title">与风险阈值确定</text>
+<text x="896" y="316" class="t-en">Objective Pain Index &amp; risk thresholds</text>
+<line x1="864" y1="330" x2="1146" y2="330" class="hair"/>
+<rect x="864" y="344" width="4" height="4" class="dot dot-a1"/>
+<text x="876" y="352" class="t-sub">连续量化输出（0–100）并与主观评分对齐</text>
+<rect x="864" y="363" width="4" height="4" class="dot dot-a1"/>
+<text x="876" y="371" class="t-sub">确定预警截断值与疼痛风险分层</text>
+<circle cx="872" cy="263" r="13" class="badge badge-a1"/>
+<text x="872" y="268" class="t-badge" text-anchor="middle">3</text>
+<path d="M406,316.5 L453,316.5" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<path d="M791,316.5 L838,316.5" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="310" y="471" width="620" height="70" rx="8" class="card card-gate "/>
+<text x="620" y="497" class="t-title" text-anchor="middle">里程碑：模型锁定与 SOP 定稿</text>
+<text x="620" y="521" class="t-en" text-anchor="middle">Milestone — model lock &amp; standard operating procedure finalized</text>
+<path d="M1005,391 L1005,439 A10,10 0 0 1 995,449 L629,449 A9,9 0 0 0 620,458 L620,467" class="conn conn-gate" fill="none" marker-end="url(#ah)"/>
+<path d="M620,146 L620,200 A10,10 0 0 1 610,210 L245,210 A10,10 0 0 0 235,220 L235,238" class="conn" fill="none" marker-end="url(#ah)"/>
+<path d="M620,541 L620,633" class="conn" fill="none" marker-end="url(#ah)"/>
+<rect x="410" y="637" width="420" height="106" rx="8" class="card card-a2 "/>
+<text x="620" y="663" class="t-title" text-anchor="middle">随机分组</text>
+<text x="620" y="687" class="t-en" text-anchor="middle">Randomization  (1 : 1)</text>
+<line x1="432" y1="701" x2="808" y2="701" class="hair"/>
+<text x="620" y="723" class="t-sub" text-anchor="middle">分层区组随机 · 中央分配隐藏 · 结局评价者与统计师设盲</text>
+<rect x="72" y="809" width="518" height="144" rx="8" class="card card-a2 "/>
+<text x="94" y="835" class="t-title">客观疼痛指数（OPI）辅助组</text>
+<text x="94" y="859" class="t-en">OPI-assisted management  ·  intervention arm   n = ___</text>
+<line x1="94" y1="873" x2="568" y2="873" class="hair"/>
+<rect x="94" y="887" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="895" class="t-sub">常规镇痛管理 + OPI 连续监测与实时显示</text>
+<rect x="94" y="906" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="914" class="t-sub">超阈值自动预警，触发人机协同决策</text>
+<rect x="94" y="925" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="933" class="t-sub">按预设 SOP 调整镇痛方案并记录响应</text>
+<rect x="650" y="809" width="518" height="144" rx="8" class="card card-ctrl "/>
+<text x="672" y="835" class="t-title">常规管理组</text>
+<text x="672" y="859" class="t-en">Standard care  ·  control arm   n = ___</text>
+<line x1="672" y1="873" x2="1146" y2="873" class="hair"/>
+<rect x="672" y="887" width="4" height="4" class="dot dot-ctrl"/>
+<text x="684" y="895" class="t-sub">按现行镇痛常规进行管理</text>
+<rect x="672" y="906" width="4" height="4" class="dot dot-ctrl"/>
+<text x="684" y="914" class="t-sub">定时 NRS／VAS 评估与经验性调整</text>
+<rect x="672" y="925" width="4" height="4" class="dot dot-ctrl"/>
+<text x="684" y="933" class="t-sub">同步采集 OPI，但对医护与患者设盲</text>
+<path d="M620,743 L620,767 A10,10 0 0 1 610,777 L341,777 A10,10 0 0 0 331,787 L331,805" class="conn conn-a2" fill="none" marker-end="url(#ah)"/>
+<path d="M620,743 L620,767 A10,10 0 0 0 630,777 L899,777 A10,10 0 0 1 909,787 L909,805" class="conn conn-ctrl" fill="none" marker-end="url(#ah)"/>
+<rect x="72" y="985" width="518" height="152" rx="8" class="loop"/>
+<text x="92" y="1011" class="t-loop">神经解码驱动的人机协同闭环</text>
+<text x="92" y="1030" class="t-en">Neural-decoding-driven human–AI closed loop</text>
+<rect x="88" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="140.5" y="1065" class="t-node" text-anchor="middle">连续感知</text>
+<text x="140.5" y="1080" class="t-node-en" text-anchor="middle">EEG · HRV · EDA</text>
+<rect x="215" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="267.5" y="1065" class="t-node" text-anchor="middle">实时 OPI</text>
+<text x="267.5" y="1080" class="t-node-en" text-anchor="middle">0–100 连续输出</text>
+<path d="M197,1068 L212,1068" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="342" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="394.5" y="1065" class="t-node" text-anchor="middle">阈值预警</text>
+<text x="394.5" y="1080" class="t-node-en" text-anchor="middle">风险分层提示</text>
+<path d="M324,1068 L339,1068" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="469" y="1045" width="105" height="46" rx="6" class="node"/>
+<text x="521.5" y="1065" class="t-node" text-anchor="middle">镇痛调整</text>
+<text x="521.5" y="1080" class="t-node-en" text-anchor="middle">医护决策 + SOP</text>
+<path d="M451,1068 L466,1068" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<path d="M521.5,1091 L521.5,1105 A8,8 0 0 1 513.5,1113 L148.5,1113 A8,8 0 0 1 140.5,1105 L140.5,1095" class="conn conn-fb" fill="none" marker-end="url(#ah-fb)"/>
+<rect x="277.7" y="1104" width="106.6" height="16" class="lbl-bg"/>
+<text x="331" y="1117" class="t-fb" text-anchor="middle">疗效再评估 · 反馈</text>
+<path d="M331,953 L331,981" class="conn conn-a1" fill="none" marker-end="url(#ah)"/>
+<rect x="72" y="1205" width="518" height="144" rx="8" class="card card-a2 "/>
+<text x="94" y="1231" class="t-title">随访与结局评价</text>
+<text x="94" y="1255" class="t-en">Follow-up &amp; outcome assessment</text>
+<line x1="94" y1="1269" x2="568" y2="1269" class="hair"/>
+<rect x="94" y="1283" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="1291" class="t-sub">主要结局：术后 48 h 疼痛强度曲线下面积（AUC）</text>
+<rect x="94" y="1302" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="1310" class="t-sub">次要结局：阿片累积用量 · 补救镇痛率 · 恢复质量</text>
+<rect x="94" y="1321" width="4" height="4" class="dot dot-a2"/>
+<text x="106" y="1329" class="t-sub">安全性与远期：不良事件 · 慢性术后疼痛（3／6 个月）</text>
+<rect x="650" y="1205" width="518" height="144" rx="8" class="card card-a2 "/>
+<text x="672" y="1231" class="t-title">统计分析</text>
+<text x="672" y="1255" class="t-en">Statistical analysis</text>
+<line x1="672" y1="1269" x2="1146" y2="1269" class="hair"/>
+<rect x="672" y="1283" width="4" height="4" class="dot dot-a2"/>
+<text x="684" y="1291" class="t-sub">意向性治疗（ITT）为主，符合方案集（PP）为辅</text>
+<rect x="672" y="1302" width="4" height="4" class="dot dot-a2"/>
+<text x="684" y="1310" class="t-sub">混合效应模型 · 协变量校正 · 多重比较控制</text>
+<rect x="672" y="1321" width="4" height="4" class="dot dot-a2"/>
+<text x="684" y="1329" class="t-sub">预设亚组分析 · 缺失数据多重插补 · 敏感性分析</text>
+<path d="M331,1137 L331,1163 A10,10 0 0 0 331,1183 L331,1201" class="conn conn-a2" fill="none" marker-end="url(#ah)"/>
+<path d="M909,953 L909,1163 A10,10 0 0 1 899,1173 L331,1173" class="conn conn-ctrl" fill="none"/>
+<circle cx="331" cy="1173" r="3.6" class="junction"/>
+<path d="M598,1277 L646,1277" class="conn conn-a2" fill="none" marker-end="url(#ah)"/>
+<rect x="72" y="553" width="191.525" height="36" rx="18" class="tab tab-a2"/>
+<text x="92" y="576.2" class="t-tab">阶段 Ⅱ · 随机对照试验</text>
+<text x="277.525" y="575" class="t-tab-en tone-a2">PHASE II · RANDOMISED CONTROLLED TRIAL</text>
+<text x="1168" y="575" class="t-note" text-anchor="end">研究周期：约 __ 个月</text>
+<line x1="72" y1="1419" x2="98" y2="1419" class="conn conn-a1" marker-end="url(#ah)"/>
+<text x="112" y="1423" class="t-leg">主流程</text>
+<line x1="172.5" y1="1419" x2="198.5" y2="1419" class="conn conn-fb" marker-end="url(#ah-fb)"/>
+<text x="212.5" y="1423" class="t-leg">反馈闭环</text>
+<rect x="284.5" y="1412" width="14" height="14" rx="3" class="card card-gate"/>
+<text x="308.5" y="1423" class="t-leg">阶段里程碑（Go／No-Go）</text>
+<text x="1168" y="1423" class="t-note" text-anchor="end">下划线处 ___ 为待填写的样本量与时间参数</text>
+</svg>
