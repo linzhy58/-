@@ -1,4 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1465 1920" class="fig-root" role="img" aria-label="研究技术路线：阶段Ⅰ前瞻性观察队列完成多模态神经生理感知、疼痛神经解码模型开发验证与客观疼痛指数风险阈值确定，经模型锁定与SOP定稿后进入阶段Ⅱ随机对照试验，比较客观疼痛指数辅助的人机协同闭环管理与常规管理。">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1465 1920" width="1465" height="1920" class="fig-root" role="img" aria-label="研究技术路线：阶段Ⅰ前瞻性观察队列完成多模态神经生理感知、疼痛神经解码模型开发验证与客观疼痛指数风险阈值确定，经模型锁定与SOP定稿后进入阶段Ⅱ随机对照试验，比较客观疼痛指数辅助的人机协同闭环管理与常规管理。">
+<style>
+svg.fig-root {
+  --f-paper:#FFFFFF; --f-ink:#12212B; --f-muted:#48606D; --f-note:#5D707C;
+  --f-hair:#DAE3E8; --f-band1:#F2F7F9; --f-band1-line:#DCE9EE;
+  --f-band2:#F5F6FA; --f-band2-line:#E0E4EE;
+  --f-a1:#1C6C86; --f-a2:#2C4C7C; --f-ctrl:#68747F; --f-gate:#9A6B1E;
+  --f-gate-fill:#FCF6EA; --f-gate-line:#E3CB9C;
+  --f-card-line:#D5DFE5; --f-card-line2:#B9C4DA; --f-card-line3:#DEE2E6;
+  --f-node:#F4F9FB; --f-node-line:#CBDFE7; --f-loop-line:#8FBFCF;
+  --f-conn:#48606D; --f-on-accent:#FFFFFF;
+}
+
+.fig-root { font-family: "Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei",-apple-system,"Segoe UI",Arial,sans-serif; }
+.band { stroke-width:2.2; }
+.band-a1 { fill:var(--f-band1); stroke:var(--f-band1-line); }
+.band-a2 { fill:var(--f-band2); stroke:var(--f-band2-line); }
+.card { fill:var(--f-paper); stroke-width:2.4; }
+.card-a1 { stroke:var(--f-card-line); }
+.card-a2 { stroke:var(--f-card-line2); stroke-width:3; }
+.card-ctrl { stroke:var(--f-card-line3); }
+.card-ink { stroke:var(--f-card-line); }
+.card-gate { fill:var(--f-gate-fill); stroke:var(--f-gate-line); stroke-width:3; }
+.badge-a1 { fill:var(--f-a1); }
+.badge-a2 { fill:var(--f-a2); }
+.dot-a1 { fill:var(--f-a1); }
+.dot-a2 { fill:var(--f-a2); }
+.dot-ctrl { fill:var(--f-ctrl); }
+.dot-ink { fill:var(--f-muted); }
+.dot-gate { fill:var(--f-gate); }
+.hair { stroke:var(--f-hair); stroke-width:2; }
+.tab { stroke:none; }
+.tab-a1 { fill:var(--f-a1); }
+.tab-a2 { fill:var(--f-a2); }
+.loop { fill:none; stroke:var(--f-loop-line); stroke-width:2.6; stroke-dasharray:11 9; }
+.node { fill:var(--f-node); stroke:var(--f-node-line); stroke-width:2; }
+.lbl-bg { fill:var(--f-band2); }
+.junction { fill:var(--f-conn); }
+.conn { stroke:var(--f-conn); stroke-width:3.4; stroke-linecap:round; }
+.conn-a1, .conn-a2, .conn-gate { stroke:var(--f-conn); }
+.conn-ctrl { stroke:var(--f-ctrl); }
+.conn-fb { stroke:var(--f-loop-line); stroke-width:2.8; stroke-dasharray:11 9; }
+.ah { fill:var(--f-conn); }
+.ah-fb { fill:var(--f-loop-line); }
+
+.t-title { font-size:33px; font-weight:700; fill:var(--f-ink); }
+.t-sub { font-size:28px; fill:var(--f-muted); }
+.t-badge { font-size:28px; font-weight:700; fill:var(--f-on-accent); }
+.t-tab { font-size:32px; font-weight:700; fill:var(--f-on-accent); letter-spacing:.6px; }
+.t-note { font-size:26px; fill:var(--f-note); }
+.t-loop { font-size:30px; font-weight:700; fill:var(--f-ink); }
+.t-node { font-size:28px; font-weight:700; fill:var(--f-ink); }
+.t-fb { font-size:25px; fill:var(--f-note); }
+
+</style>
 <defs>
   <marker id="ah" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="22" markerHeight="22"
           markerUnits="userSpaceOnUse" orient="auto">
@@ -9,6 +63,7 @@
     <path d="M0.5,1 L11,6 L0.5,11 L3.2,6 Z" class="ah-fb"/>
   </marker>
 </defs>
+<rect x="0" y="0" width="1465" height="1920" fill="var(--f-paper)"/>
 <rect x="40" y="764" width="1385" height="1126" rx="26" class="band band-a2"/>
 <rect x="40" y="214" width="1385" height="352" rx="26" class="band band-a1"/>
 <rect x="70" y="183" width="410.4" height="62" rx="31" class="tab tab-a1"/>

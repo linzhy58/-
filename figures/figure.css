@@ -1,83 +1,72 @@
 :root{
-  --f-paper:#FFFFFF; --f-ink:#12212B; --f-muted:#5D707C; --f-hair:#DAE3E8;
-  --f-band1:#F2F7F9; --f-band1-line:#DCE9EE;
-  --f-band2:#F5F6FA; --f-band2-line:#E0E4EE;
-  --f-a1:#1C6C86; --f-a2:#2C4C7C; --f-ctrl:#68747F; --f-gate:#9A6B1E;
-  --f-gate-fill:#FCF6EA; --f-gate-line:#E3CB9C;
-  --f-card-line:#D5DFE5; --f-card-line2:#DCE1EC; --f-card-line3:#DEE2E6;
-  --f-node:#F4F9FB; --f-node-line:#CBDFE7; --f-loop-line:#8FBFCF;
-  --f-on-accent:#FFFFFF;
+  --f-paper:#FFFFFF; --f-ink:#000000; --f-muted:#333333; --f-note:#555555;
+  --f-hair:#C4C4C4; --f-band1:#EFEFEF; --f-band1-line:#CFCFCF;
+  --f-band2:#F7F7F7; --f-band2-line:#D7D7D7;
+  --f-a1:#111111; --f-a2:#4A4A4A; --f-ctrl:#8A8A8A; --f-gate:#000000;
+  --f-gate-fill:#E3E3E3; --f-gate-line:#5A5A5A;
+  --f-card-line:#8C8C8C; --f-card-line2:#3C3C3C; --f-card-line3:#A8A8A8;
+  --f-node:#F2F2F2; --f-node-line:#9A9A9A; --f-loop-line:#5A5A5A;
+  --f-conn:#333333; --f-on-accent:#FFFFFF;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --f-paper:#141E26; --f-ink:#E8EFF3; --f-muted:#9DAEB9; --f-hair:#2C3A45;
-  --f-band1:#101A21; --f-band1-line:#22343E;
-  --f-band2:#121821; --f-band2-line:#25303F;
-  --f-a1:#63B6CD; --f-a2:#8FA9DC; --f-ctrl:#9AA7B3; --f-gate:#D6AC63;
-  --f-gate-fill:#231C10; --f-gate-line:#4A3B22;
-  --f-card-line:#2B3B45; --f-card-line2:#2C3648; --f-card-line3:#303A42;
-  --f-node:#16242C; --f-node-line:#2B4450; --f-loop-line:#3C6A7B;
-  --f-on-accent:#0E1A20;
+  --f-paper:#14181B; --f-ink:#F2F4F5; --f-muted:#C4CACD; --f-note:#A6ADB1;
+  --f-hair:#3A4145; --f-band1:#1E2427; --f-band1-line:#333A3E;
+  --f-band2:#181D20; --f-band2-line:#2C3336;
+  --f-a1:#E8ECEE; --f-a2:#B9C0C4; --f-ctrl:#7E878C; --f-gate:#F2F4F5;
+  --f-gate-fill:#2A3033; --f-gate-line:#6B7479;
+  --f-card-line:#4A5256; --f-card-line2:#8B9498; --f-card-line3:#3E4549;
+  --f-node:#1E2427; --f-node-line:#4A5256; --f-loop-line:#798388;
+  --f-conn:#C4CACD; --f-on-accent:#14181B;
 }}
 :root[data-theme="dark"]{
-  --f-paper:#141E26; --f-ink:#E8EFF3; --f-muted:#9DAEB9; --f-hair:#2C3A45;
-  --f-band1:#101A21; --f-band1-line:#22343E;
-  --f-band2:#121821; --f-band2-line:#25303F;
-  --f-a1:#63B6CD; --f-a2:#8FA9DC; --f-ctrl:#9AA7B3; --f-gate:#D6AC63;
-  --f-gate-fill:#231C10; --f-gate-line:#4A3B22;
-  --f-card-line:#2B3B45; --f-card-line2:#2C3648; --f-card-line3:#303A42;
-  --f-node:#16242C; --f-node-line:#2B4450; --f-loop-line:#3C6A7B;
-  --f-on-accent:#0E1A20;
+  --f-paper:#14181B; --f-ink:#F2F4F5; --f-muted:#C4CACD; --f-note:#A6ADB1;
+  --f-hair:#3A4145; --f-band1:#1E2427; --f-band1-line:#333A3E;
+  --f-band2:#181D20; --f-band2-line:#2C3336;
+  --f-a1:#E8ECEE; --f-a2:#B9C0C4; --f-ctrl:#7E878C; --f-gate:#F2F4F5;
+  --f-gate-fill:#2A3033; --f-gate-line:#6B7479;
+  --f-card-line:#4A5256; --f-card-line2:#8B9498; --f-card-line3:#3E4549;
+  --f-node:#1E2427; --f-node-line:#4A5256; --f-loop-line:#798388;
+  --f-conn:#C4CACD; --f-on-accent:#14181B;
 }
 
-.fig-root { font-family: "Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
-.band { stroke-width:1; }
+.fig-root { font-family: "Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei",-apple-system,"Segoe UI",Arial,sans-serif; }
+.band { stroke-width:2.2; }
 .band-a1 { fill:var(--f-band1); stroke:var(--f-band1-line); }
 .band-a2 { fill:var(--f-band2); stroke:var(--f-band2-line); }
-.card { fill:var(--f-paper); stroke-width:1.1; }
+.card { fill:var(--f-paper); stroke-width:2.4; }
 .card-a1 { stroke:var(--f-card-line); }
-.card-a2 { stroke:var(--f-card-line2); }
+.card-a2 { stroke:var(--f-card-line2); stroke-width:3; }
 .card-ctrl { stroke:var(--f-card-line3); }
-.card-ink { stroke:var(--f-card-line3); }
-.card-gate { fill:var(--f-gate-fill); stroke:var(--f-gate-line); }
+.card-ink { stroke:var(--f-card-line); }
+.card-gate { fill:var(--f-gate-fill); stroke:var(--f-gate-line); stroke-width:3; }
 .badge-a1 { fill:var(--f-a1); }
 .badge-a2 { fill:var(--f-a2); }
-.dot { }
 .dot-a1 { fill:var(--f-a1); }
 .dot-a2 { fill:var(--f-a2); }
 .dot-ctrl { fill:var(--f-ctrl); }
 .dot-ink { fill:var(--f-muted); }
 .dot-gate { fill:var(--f-gate); }
-.hair { stroke:var(--f-hair); stroke-width:1; }
+.hair { stroke:var(--f-hair); stroke-width:2; }
 .tab { stroke:none; }
 .tab-a1 { fill:var(--f-a1); }
 .tab-a2 { fill:var(--f-a2); }
-.loop { fill:none; stroke:var(--f-loop-line); stroke-width:1.2; stroke-dasharray:5 4; }
-.node { fill:var(--f-node); stroke:var(--f-node-line); stroke-width:1; }
+.loop { fill:none; stroke:var(--f-loop-line); stroke-width:2.6; stroke-dasharray:11 9; }
+.node { fill:var(--f-node); stroke:var(--f-node-line); stroke-width:2; }
 .lbl-bg { fill:var(--f-band2); }
-.conn { stroke:var(--f-muted); stroke-width:1.6; stroke-linecap:round; }
-.conn-a1 { stroke:var(--f-a1); }
-.conn-a2 { stroke:var(--f-a2); }
+.junction { fill:var(--f-conn); }
+.conn { stroke:var(--f-conn); stroke-width:3.4; stroke-linecap:round; }
+.conn-a1, .conn-a2, .conn-gate { stroke:var(--f-conn); }
 .conn-ctrl { stroke:var(--f-ctrl); }
-.conn-gate { stroke:var(--f-gate); }
-.conn-fb { stroke:var(--f-a1); stroke-dasharray:5 4; stroke-width:1.4; }
-.junction { fill:var(--f-a2); }
-.ah { fill:var(--f-muted); }
-.ah-fb { fill:var(--f-a1); }
+.conn-fb { stroke:var(--f-loop-line); stroke-width:2.8; stroke-dasharray:11 9; }
+.ah { fill:var(--f-conn); }
+.ah-fb { fill:var(--f-loop-line); }
 
-.t-title { font-size:16px; font-weight:600; fill:var(--f-ink); letter-spacing:.2px; }
-.t-en { font-size:11px; fill:var(--f-muted); letter-spacing:.25px; }
-.t-sub { font-size:12.2px; fill:var(--f-muted); }
-.t-badge { font-size:12.5px; font-weight:700; fill:var(--f-on-accent); letter-spacing:0; }
-.t-tab { font-size:14.5px; font-weight:600; fill:var(--f-on-accent); letter-spacing:.4px; }
-.t-tab-en { font-size:10.5px; font-weight:600; letter-spacing:.9px; }
-.tone-a1 { fill:var(--f-a1); }
-.tone-a2 { fill:var(--f-a2); }
-.t-note { font-size:11px; fill:var(--f-muted); }
-.t-loop { font-size:14px; font-weight:600; fill:var(--f-a1); letter-spacing:.2px; }
-.t-node { font-size:13px; font-weight:600; fill:var(--f-ink); }
-.t-node-en { font-size:10px; fill:var(--f-muted); }
-.t-fb { font-size:11px; fill:var(--f-a1); }
-.t-leg { font-size:11.5px; fill:var(--f-muted); }
-.t-cap { font-size:12.5px; fill:var(--f-muted); }
-.t-cap-b { font-weight:700; fill:var(--f-ink); }
+.t-title { font-size:33px; font-weight:700; fill:var(--f-ink); }
+.t-sub { font-size:28px; fill:var(--f-muted); }
+.t-badge { font-size:28px; font-weight:700; fill:var(--f-on-accent); }
+.t-tab { font-size:32px; font-weight:700; fill:var(--f-on-accent); letter-spacing:.6px; }
+.t-note { font-size:26px; fill:var(--f-note); }
+.t-loop { font-size:30px; font-weight:700; fill:var(--f-ink); }
+.t-node { font-size:28px; font-weight:700; fill:var(--f-ink); }
+.t-fb { font-size:25px; fill:var(--f-note); }
 
